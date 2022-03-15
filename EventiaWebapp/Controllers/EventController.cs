@@ -6,17 +6,17 @@ namespace EventiaWebapp.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return View("Index");
         }
 
         public IActionResult Events()
         {
-            return View();
+            return View("Events");
         }
 
         public IActionResult MyEvents()
         {
-            return View();
+            return View("MyEvents");
         }
     }
 }
