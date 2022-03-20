@@ -1,4 +1,7 @@
-﻿namespace EventiaWebapp.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace EventiaWebapp.Models
 {
     public class Event
     {
@@ -10,5 +13,9 @@
         public DateTime Date { get; set; }
         public int Spots_available { get; set; }
 
+        public ICollection<Attendee> Attendees { get; set; }
+
+        [ForeignKey("Organizer_Id")]
+        public Organizer Organizer { get; set; }
     }
 }
