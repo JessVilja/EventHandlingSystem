@@ -8,5 +8,6 @@
         public string Phone_number { get; set; }
         public ICollection<Event> Events { get; set; }
 
+
     }
 }
