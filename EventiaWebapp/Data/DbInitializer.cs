@@ -79,28 +79,28 @@ namespace EventiaWebapp.Data
                     Name = "Debbie Reynolds",
                     Email = "debbier@gmail.com",
                     Phone_number = "0765434409",
-                    Events = new List<Event> {Events[0]}
+                   
                 },
                 new Attendee
                 {
                     Name = "Sara Silver",
                     Email = "saras@gmail.com",
                     Phone_number = "0709876625",
-                    Events = new List<Event> {Events[2]}
+             
                 },
                 new Attendee
                 {
                     Name = "Meg Griffin",
                     Email = "meggriffin@gmail.com",
                     Phone_number = "0738973365",
-                    Events = new List<Event> {Events[1]}
+                  
                 },
                 new Attendee
                 {
                     Name = "Lisa Simpson",
                     Email = "lisasimpson@gmail.com",
                     Phone_number = "0727769221",
-                    Events = new List<Event> {Events[1]}
+                  
                 },
 
             };

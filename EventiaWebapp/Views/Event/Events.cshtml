@@ -7,6 +7,10 @@
         margin: 1rem;
         box-shadow: 5px 5px 9px -2px rgba(0,0,0,0.43);
     }
+
+    .title-size {
+        font-size: 1.5rem;
+    }
 </style>
 
     @{
@@ -19,20 +23,20 @@
     {
         <div class="accordion-item">
             <h2 class="accordion-header d-flex" id="headingOne">
-                <button class="accordion-button collapsed display-3" type="button" data-bs-toggle="collapse" data-bs-target="#i-@item.Id" aria-expanded="false" aria-controls="i-@item.Id">
+                <button class="accordion-button collapsed display-3 title-size" type="button" data-bs-toggle="collapse" data-bs-target="#i-@item.Id" aria-expanded="false" aria-controls="i-@item.Id">
                     @item.Title
                 </button>
-                <button class="btn btn-primary join-button">Join</button>
+                <a class="btn btn-primary join-button" asp-controller="Event" asp-action="Join" asp-route-id="@item.Id">Join</a>
             </h2>
 
-            <div id="i-@item.Id" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div id="i-@item.Id" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <h2>@item.Title</h2>
-                    <p>@item.Description</p>
-                    <p>@item.Place</p>
-                    <p>@item.Address</p>
-                    <p>@item.Date</p>
-                    <p>@item.Spots_available</p>
+                  
+                    <p>Description: @item.Description</p>
+                    <p>Place: @item.Place</p>
+                    <p>Address: @item.Address</p>
+                    <p> Date: @item.Date</p>
+                    <p>Spots available: @item.Spots_available</p>
                 </div>
             </div>
         </div>
