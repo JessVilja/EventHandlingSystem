@@ -1,14 +1,11 @@
 ﻿@model EventiaWebapp.Models.Event
 
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<style>
-    .card-styling {
-        margin: 0 auto;
-        background-color: rgba(40, 158, 175, 0.12);
-        box-shadow: 5px 5px 9px -2px rgba(0,0,0,0.43);
-    }
-</style>
+
+@{
+    ViewBag.Title = "Join Event";
+}
+
 <p>
     @Html.DisplayNameFor(e => e.Title);
 </p>

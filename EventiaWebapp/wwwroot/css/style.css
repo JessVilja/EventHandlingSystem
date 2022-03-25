@@ -1,0 +1,32 @@
+﻿html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1 0 auto;
+}
+
+.footer-style {
+    flex-shrink: 0;
+    height: 3rem;
+    line-height: 3rem;
+}
+.join-button {
+    margin: 1rem;
+    box-shadow: 5px 5px 9px -2px rgba(0,0,0,0.43);
+}
+
+.title-size {
+    font-size: 1.5rem;
+}
+
+.card-styling {
+    margin: 0 auto;
+    background-color: rgba(40, 158, 175, 0.12);
+    box-shadow: 5px 5px 9px -2px rgba(0,0,0,0.43);
+}

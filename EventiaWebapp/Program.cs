@@ -36,6 +36,7 @@ using(var scope = app.Services.CreateScope())
     await context.Initialize();
     // DbInitializer.Initialize(context);
 }
+app.UseStaticFiles();
 app.UseRouting();
 
 
