@@ -23,19 +23,13 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
 
     var context = services.GetRequiredService<EventiaDbContext>();
+    var ctx = services.GetRequiredService<DbInitializer>();
     context.Database.EnsureDeleted();
     context.Database.EnsureCreated();
+    await ctx.Initialize();
     // DbInitializer.Initialize(context);
 }
 
-using(var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-
-    var context = services.GetRequiredService<DbInitializer>();
-    await context.Initialize();
-    // DbInitializer.Initialize(context);
-}
 app.UseStaticFiles();
 app.UseRouting();
 

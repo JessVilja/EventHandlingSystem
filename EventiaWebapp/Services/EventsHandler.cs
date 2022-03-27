@@ -33,15 +33,24 @@ namespace EventiaWebapp.Services
 
         public async Task<Event> JoinedEvent(Attendee attendee, int Eid)
         {
-            var query = await _context.Attendees.Where(a => a.Id == Eid).Include(e => e.Events).FirstOrDefaultAsync();
+            var query = await _context.Attendees.Where(a => a.Id == attendee.Id).Include(e => e.Events).FirstOrDefaultAsync();
             var query2 = await _context.Events.Where(e => e.Id == Eid).FirstOrDefaultAsync();
 
             query.Events.Add(query2);
 
-            _context.Update(query2);
+            _context.Update(query);
             await _context.SaveChangesAsync();
 
             return query2;
+        }
+
+        public async Task<List<Event>> SingleAttendeeEventList(Attendee attendee)
+        {
+            var singleAttendeeQuery = await _context.Attendees.Where(a => a.Id == attendee.Id).Include(ae => ae.Events).FirstOrDefaultAsync();
+
+            var events = _context.Events.Where(e => e.Attendees.Contains(singleAttendeeQuery)).Include(o => o.Organizer);
+            var listOfEvents = await events.ToListAsync();
+            return listOfEvents;
         }
     }
 }

@@ -24,7 +24,8 @@ namespace EventiaWebapp.Controllers
 
         public async Task<IActionResult> MyEvents()
         {
-            return View("MyEvents");
+            var attendee = await _EventsHandler.GetSingleAttendee(1);
+            return View("MyEvents", attendee);
         }
        
         public async Task<IActionResult> Join(int id)

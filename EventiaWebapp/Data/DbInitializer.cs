@@ -79,7 +79,6 @@ namespace EventiaWebapp.Data
                     Name = "Debbie Reynolds",
                     Email = "debbier@gmail.com",
                     Phone_number = "0765434409",
-                   
                 },
                 new Attendee
                 {

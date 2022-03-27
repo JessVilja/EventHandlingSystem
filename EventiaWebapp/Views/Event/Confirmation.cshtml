@@ -2,4 +2,25 @@
 @{
     ViewBag.Title = "Event Confirmation Page";
 }
-<p>Success! @Model.Title</p>
+
+<div class="card text-center card-styling" style="width: 40rem;">
+    <div class="card-body">
+        <h4 class="card-title display-4">
+            Your chosen event: @Model.Title
+        </h4>
+        <p class="card-text">
+            <p>Description: @Model.Description</p>
+            <p>Place: @Model.Place</p>
+            <p>Address: @Model.Address</p>
+            <p>Date: @Model.Date</p>
+            <p>Spots available: @Model.Spots_available</p>
+        </p>
+    </div>
+</div>
+
+<h2 class="text-center my-4">Successfully joined @Model.Title! See you there!</h2>
+
+<div class="text-center">
+<a asp-controller="Event" asp-action="Events" class="btn btn-lg btn-dark text-center">View More Events</a>
+<a asp-controller="Event" asp-action="MyEvents" asp-route-id="@Model.Id" class="btn btn-lg btn-dark text-center">View Your Events</a>
+</div>
