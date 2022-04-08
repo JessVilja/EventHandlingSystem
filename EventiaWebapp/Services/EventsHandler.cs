@@ -18,12 +18,12 @@ namespace EventiaWebapp.Services
             var items = await _context.Events.ToListAsync();
             return items;
         }
-
-        public async Task<Attendee> GetSingleAttendee(int id)
+        /*
+        public async Task<User> GetSingleAttendee(int id)
         {
-            var singleAttendee = await _context.Attendees.Where(A => A.Id == id).FirstOrDefaultAsync();
-            return singleAttendee;
-        }
+            var singleAttendee = await _context.Users.Where(A => A.Id == id).FirstOrDefaultAsync();
+            return singleAttendee; 
+        } */
 
         public async Task<Event> GetSingleEventById(int id)
         {
@@ -31,12 +31,13 @@ namespace EventiaWebapp.Services
             return singleEvent;
         }
 
-        public async Task<Event> JoinedEvent(Attendee attendee, int Eid)
+        public async Task<Event> JoinedEvent(User attendee, int Eid)
         {
-            var query = await _context.Attendees.Where(a => a.Id == attendee.Id).Include(e => e.Events).FirstOrDefaultAsync();
+            
+            var query = await _context.Users.Where(a => a.Id == attendee.Id).Include(e => e.JoinedEvents).FirstOrDefaultAsync();
             var query2 = await _context.Events.Where(e => e.Id == Eid).FirstOrDefaultAsync();
 
-            query.Events.Add(query2);
+            query.JoinedEvents.Add(query2);
 
             _context.Update(query);
             await _context.SaveChangesAsync();
@@ -44,9 +45,9 @@ namespace EventiaWebapp.Services
             return query2;
         }
 
-        public async Task<List<Event>> SingleAttendeeEventList(Attendee attendee)
+        public async Task<List<Event>> SingleAttendeeEventList(User attendee)
         {
-            var singleAttendeeQuery = await _context.Attendees.Where(a => a.Id == attendee.Id).Include(ae => ae.Events).FirstOrDefaultAsync();
+            var singleAttendeeQuery = await _context.Users.Where(a => a.Id == attendee.Id).FirstOrDefaultAsync();
 
             var events = _context.Events.Where(e => e.Attendees.Contains(singleAttendeeQuery)).Include(o => o.Organizer);
             var listOfEvents = await events.ToListAsync();

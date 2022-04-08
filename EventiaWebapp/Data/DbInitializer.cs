@@ -4,22 +4,23 @@ namespace EventiaWebapp.Data
 {
     public class DbInitializer
     {
-        private readonly EventiaDbContext _context;
+        private readonly EventiaDbContext _ctx;
         public DbInitializer(EventiaDbContext context)
         {
-            _context = context;
+            _ctx = context;
         }
+        
         public async Task Initialize()
         {
-            var Organizer = new Organizer[]
+           /* var Organizer = new List<User>[]
             {
-                new Organizer
+                new User
                 {
-                    Name = "Ryans Travelling Agency",
+                    FirstName = "Ryans Travelling Agency",
                     Email = "ryanstravelling@gmail.com",
                     Phone_number = "0730781129"
                 },
-                new Organizer
+                new User
                 {
                     Name = "Happy Places Travelling",
                     Email = "happyplacestravelling@gmail.com",
@@ -31,9 +32,9 @@ namespace EventiaWebapp.Data
                     Email = "ttc@gmail.com",
                     Phone_number = "0723756493"
                 },
-            };
-
-            var Events = new Event[]
+            }; 
+           */
+           var Events = new List<Event>
             {
                 new Event
                 {
@@ -42,7 +43,7 @@ namespace EventiaWebapp.Data
                         "In a time when the world is changing forever, there is one place where everyone can be free…",
                     Place = "Kit Kat Club", Address = "Northumberland Ave, London WC2N 5DE, United Kingdom",
                     Date = new DateTime(2022, 10, 22), Spots_available = 22,
-                    Organizer = Organizer[0]
+                   
                 },
                 new Event
                 {
@@ -50,7 +51,7 @@ namespace EventiaWebapp.Data
                     Description = "The '80s romcom is now a Broadway musical that hits all the right notes",
                     Place = "Savoy Theatre", Address = "Savoy Ct, Strand, London WC2R 0ET, United Kingdom",
                     Date = new DateTime(2022, 09, 10), Spots_available = 165,
-                    Organizer = Organizer[2]
+           
                 },
                 new Event
                 {
@@ -59,7 +60,7 @@ namespace EventiaWebapp.Data
                         "The Book of Mormon musical follows the journey of two Mormon missionaries who travel to Africa to preach their religion.",
                     Place = "Prince of Wales Theatre", Address = "Coventry St, London W1D 6AS, United Kingdom",
                     Date = new DateTime(2023, 1, 28), Spots_available = 89,
-                    Organizer = Organizer[1]
+   
                 },
                 new Event
                 {
@@ -68,10 +69,10 @@ namespace EventiaWebapp.Data
                         "Based on the hit 1994 Walt Disney animated film of the same name, The Lion King musical is set in the African Pridelands and tells the coming of age story of lion cub Simba",
                     Place = "Lyceum Theatre", Address = "21 Wellington St, London WC2E 7RQ, United Kingdom",
                     Date = new DateTime(2022, 6, 5), Spots_available = 245,
-                    Organizer = Organizer[0]
-                },
-            };
 
+                },
+            }; 
+            /*
             var Attendee = new Attendee[]
             {
                 new Attendee
@@ -100,14 +101,39 @@ namespace EventiaWebapp.Data
                     Email = "lisasimpson@gmail.com",
                     Phone_number = "0727769221",
                   
-                },
+                }, 
 
-            };
+            }; */
             
-            await _context.AddRangeAsync(Events);
-            await _context.AddRangeAsync(Attendee);
-            await _context.AddRangeAsync(Organizer);
-            await _context.SaveChangesAsync();
+           await _ctx.AddRangeAsync(Events);
+           // await _context.AddRangeAsync(Attendee);
+           //await _context.AddRangeAsync(Organizer);
+            await _ctx.SaveChangesAsync(); 
+        } 
+        public async Task Recreate()
+        {
+            await _ctx.Database.EnsureDeletedAsync();
+            await _ctx.Database.EnsureCreatedAsync();
         }
-    }
+
+        public async Task RecreateAndSeed()
+        {
+            await Recreate();
+            await Initialize();
+        }
+
+        public async Task CreateIfNotExist()
+        {
+            await _ctx.Database.EnsureCreatedAsync();
+        }
+
+        public async Task CreateAndSeedIfNotExist()
+        {
+            bool didCreateDatabase = await _ctx.Database.EnsureCreatedAsync();
+            if (didCreateDatabase)
+            {
+                await Initialize();
+            }
+        }
+    } 
 }

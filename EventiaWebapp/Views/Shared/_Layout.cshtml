@@ -28,7 +28,7 @@
                         <a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="MyEvents">My Events</a>
                     </li>
                 </ul>
-                <button type="button" class="btn btn-light">Login</button>
+                <partial name="_LoginPartial" />
             </div>
         </div>
     </nav>
@@ -42,5 +42,6 @@
     </div>
 </footer>
 <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+@await RenderSectionAsync("Scripts", false)
 </body>
 </html>

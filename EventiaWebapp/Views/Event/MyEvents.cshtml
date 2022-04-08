@@ -1,13 +1,13 @@
 ﻿@using EventiaWebapp.Services
 @inject EventsHandler _event
-@model EventiaWebapp.Models.Attendee
+@model EventiaWebapp.Models.User
 
 @{
     ViewBag.Title = "My Events";
 }
 
 @{
-    var attendeeModel = await _event.SingleAttendeeEventList(@Model);
+   // var attendeeModel = await _event.SingleAttendeeEventList(@Model);
 }
 
 
@@ -22,15 +22,16 @@
     </thead>
 
 
-<tbody>
-@foreach (var item in attendeeModel)
-{
-    <tr>
-        <td>@item.Title</td>
-        <td>@item.Description</td>
-        <td>@item.Place</td>
-        <td>@item.Organizer.Name</td>
-    </tr>
-}
-</tbody>
-</table>
+    <tbody>
+    @* 
+    @foreach (var item in attendeeModel)
+    {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.Description</td>
+            <td>@item.Place</td>
+        </tr>
+    } *@
+
+    </tbody> 
+</table> 

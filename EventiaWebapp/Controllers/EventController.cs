@@ -1,5 +1,6 @@
 ﻿using EventiaWebapp.Models;
 using EventiaWebapp.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventiaWebapp.Controllers
@@ -24,8 +25,9 @@ namespace EventiaWebapp.Controllers
 
         public async Task<IActionResult> MyEvents()
         {
-            var attendee = await _EventsHandler.GetSingleAttendee(1);
-            return View("MyEvents", attendee);
+           /* var attendee = await _EventsHandler.GetSingleAttendee(1);
+            return View("MyEvents", attendee); */
+           return View();
         }
        
         public async Task<IActionResult> Join(int id)
@@ -36,9 +38,11 @@ namespace EventiaWebapp.Controllers
 
         public async Task<IActionResult> Confirmation(int id)
         {
+            /*
             var person = await _EventsHandler.GetSingleAttendee(1);
             var eventJoined = await _EventsHandler.JoinedEvent(person, id);
-            return View(eventJoined);
+            return View(eventJoined); */
+            return View();
         }
     }
 }

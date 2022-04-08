@@ -1,5 +1,7 @@
 using EventiaWebapp.Data;
+using EventiaWebapp.Models;
 using EventiaWebapp.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,22 +18,36 @@ builder.Services.AddDbContext<EventiaDbContext>(options =>
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+builder.Services.AddDefaultIdentity<User>()
+    .AddEntityFrameworkStores<EventiaDbContext>();
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var services = scope.ServiceProvider;
+    /*var services = scope.ServiceProvider;
 
-    var context = services.GetRequiredService<EventiaDbContext>();
-    var ctx = services.GetRequiredService<DbInitializer>();
-    context.Database.EnsureDeleted();
-    context.Database.EnsureCreated();
-    await ctx.Initialize();
+    var context = services.GetRequiredService<EventiaDbContext>();  */
+    var database = scope.ServiceProvider
+        .GetRequiredService<DbInitializer>();
+
+    if (app.Environment.IsProduction())
+    {
+        await database.CreateIfNotExist();
+    }
+
+    if (app.Environment.IsDevelopment())
+    {
+        await database.RecreateAndSeed();
+    }
     // DbInitializer.Initialize(context);
 }
 
 app.UseStaticFiles();
 app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 
 app.MapControllerRoute(
@@ -47,7 +63,7 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Event}/{action=index}");
-
+app.MapRazorPages();
 
 
 app.Run();
