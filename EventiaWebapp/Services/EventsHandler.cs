@@ -18,24 +18,25 @@ namespace EventiaWebapp.Services
             var items = await _context.Events.ToListAsync();
             return items;
         }
-        /*
-        public async Task<User> GetSingleAttendee(int id)
+
+   /*
+        public async Task<User> GetSingleAttendee(User user)
         {
             var singleAttendee = await _context.Users.Where(A => A.Id == id).FirstOrDefaultAsync();
             return singleAttendee; 
-        } */
+        }  */
 
         public async Task<Event> GetSingleEventById(int id)
         {
             var singleEvent = await _context.Events.Where(E => E.Id == id).FirstOrDefaultAsync();
             return singleEvent;
         }
-
-        public async Task<Event> JoinedEvent(User attendee, int Eid)
+        
+        public async Task<Event> JoinedEvent(User user, int id)
         {
             
-            var query = await _context.Users.Where(a => a.Id == attendee.Id).Include(e => e.JoinedEvents).FirstOrDefaultAsync();
-            var query2 = await _context.Events.Where(e => e.Id == Eid).FirstOrDefaultAsync();
+            var query = await _context.Users.Where(a => a.Id == user.Id).Include(e => e.JoinedEvents).FirstOrDefaultAsync();
+            var query2 = await _context.Events.Where(e => e.Id == id).FirstOrDefaultAsync();
 
             query.JoinedEvents.Add(query2);
 
@@ -43,7 +44,7 @@ namespace EventiaWebapp.Services
             await _context.SaveChangesAsync();
 
             return query2;
-        }
+        } 
 
         public async Task<List<Event>> SingleAttendeeEventList(User attendee)
         {

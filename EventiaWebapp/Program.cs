@@ -19,6 +19,7 @@ builder.Services.AddDbContext<EventiaDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<User>()
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<EventiaDbContext>();
 
 var app = builder.Build();
@@ -38,7 +39,7 @@ using (var scope = app.Services.CreateScope())
 
     if (app.Environment.IsDevelopment())
     {
-        await database.RecreateAndSeed();
+        await database.CreateAndSeedIfNotExist();
     }
     // DbInitializer.Initialize(context);
 }

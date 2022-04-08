@@ -1,40 +1,71 @@
 ﻿using EventiaWebapp.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace EventiaWebapp.Data
 {
     public class DbInitializer
     {
         private readonly EventiaDbContext _ctx;
-        public DbInitializer(EventiaDbContext context)
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<User> _userManager;
+        public DbInitializer(EventiaDbContext context, RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
         {
             _ctx = context;
+            _roleManager = roleManager;
+            _userManager = userManager;
         }
         
         public async Task Initialize()
         {
-           /* var Organizer = new List<User>[]
+            await _roleManager.CreateAsync(new IdentityRole("Customer"));
+            await _roleManager.CreateAsync(new IdentityRole("Organizer"));
+            await _roleManager.CreateAsync(new IdentityRole("Admin"));
+
+            var admin1 = new User()
             {
-                new User
-                {
-                    FirstName = "Ryans Travelling Agency",
-                    Email = "ryanstravelling@gmail.com",
-                    Phone_number = "0730781129"
-                },
-                new User
-                {
-                    Name = "Happy Places Travelling",
-                    Email = "happyplacestravelling@gmail.com",
-                    Phone_number = "0704373051"
-                },
-                new Organizer
-                {
-                    Name = "The Theater Tour Company",
-                    Email = "ttc@gmail.com",
-                    Phone_number = "0723756493"
-                },
-            }; 
-           */
-           var Events = new List<Event>
+                FirstName = "Sara",
+                LastName = "Johansson",
+                UserName = "sara@mail.com",
+                Email = "sara@mail.com",
+
+            };
+
+            var admin2 = new User()
+            {
+                FirstName = "Johanna",
+                LastName = "Svensson",
+                UserName = "johanna@mail.com",
+                Email = "johanna@mail.com",
+         
+            };
+            await _userManager.CreateAsync(admin1, "Passw0rd!");
+            await _userManager.CreateAsync(admin2, "Passw0rd#");
+            await _userManager.AddToRoleAsync(admin1, "Admin");
+            await _userManager.AddToRoleAsync(admin2, "Admin");
+
+            /* var Organizer = new List<User>[]
+             {
+                 new User
+                 {
+                     FirstName = "Ryans Travelling Agency",
+                     Email = "ryanstravelling@gmail.com",
+                     Phone_number = "0730781129"
+                 },
+                 new User
+                 {
+                     Name = "Happy Places Travelling",
+                     Email = "happyplacestravelling@gmail.com",
+                     Phone_number = "0704373051"
+                 },
+                 new Organizer
+                 {
+                     Name = "The Theater Tour Company",
+                     Email = "ttc@gmail.com",
+                     Phone_number = "0723756493"
+                 },
+             }; 
+            */
+            var Events = new List<Event>
             {
                 new Event
                 {

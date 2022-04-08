@@ -8,10 +8,12 @@ namespace EventiaWebapp.Controllers
     public class EventController : Controller
     {
         private readonly EventsHandler _EventsHandler;
+        private readonly UserManager<User> _userManager;
 
-        public EventController(EventsHandler eventHandler)
+        public EventController(EventsHandler eventHandler, UserManager<User> userManager)
         {
             _EventsHandler = eventHandler;
+            _userManager = userManager;
         }
         public async Task <IActionResult> Index()
         {
@@ -22,12 +24,19 @@ namespace EventiaWebapp.Controllers
         {
             return View("Events");
         }
-
+        /*
+        public User GetCurrentUser()
+        {
+            var currentUser = user;
+            var user = _userManager.GetUserAsync(User).Result;
+            return user;
+        } */
         public async Task<IActionResult> MyEvents()
         {
-           /* var attendee = await _EventsHandler.GetSingleAttendee(1);
-            return View("MyEvents", attendee); */
-           return View();
+            var attendee = await _userManager.GetUserAsync(User);
+           // var attendee = await _EventsHandler.GetSingleAttendee(1);
+            return View("MyEvents", attendee); 
+           //return View();
         }
        
         public async Task<IActionResult> Join(int id)
@@ -38,11 +47,10 @@ namespace EventiaWebapp.Controllers
 
         public async Task<IActionResult> Confirmation(int id)
         {
-            /*
-            var person = await _EventsHandler.GetSingleAttendee(1);
+            var person = await _userManager.GetUserAsync(User);
             var eventJoined = await _EventsHandler.JoinedEvent(person, id);
-            return View(eventJoined); */
-            return View();
+            return View(eventJoined); 
+            
         }
     }
 }

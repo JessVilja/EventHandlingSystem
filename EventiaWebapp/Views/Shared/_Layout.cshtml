@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using EventiaWebapp.Models
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<User> SignInManager
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -24,11 +29,9 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="Events">Events</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="MyEvents">My Events</a>
-                    </li>
+                    <partial name="_LoginPartial" />
                 </ul>
-                <partial name="_LoginPartial" />
+                
             </div>
         </div>
     </nav>
