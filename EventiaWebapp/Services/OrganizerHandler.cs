@@ -33,6 +33,15 @@ namespace EventiaWebapp.Services
             
         }
 
-        
+        public async Task<List<Event>> SingleOrganizerEventList(User organizer)
+        {
+            var singleOrganizer = await _context.Users.Where(a => a.Id == organizer.Id).FirstOrDefaultAsync();
+            var events = _context.Events.Where(e => e.Organizer == singleOrganizer);
+            var eventList = await events.ToListAsync();
+
+            return eventList;
+        }
+
+
     }
 }

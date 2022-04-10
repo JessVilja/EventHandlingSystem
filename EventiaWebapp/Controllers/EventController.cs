@@ -70,5 +70,13 @@ namespace EventiaWebapp.Controllers
         {
             return View();
         }
+
+        public async Task<IActionResult> OrganizeEvent()
+        {
+            //var person = await _userManager.GetUserAsync(User);
+
+
+            return View();
+        }
     }
 }
