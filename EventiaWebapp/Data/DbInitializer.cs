@@ -38,10 +38,33 @@ namespace EventiaWebapp.Data
                 Email = "johanna@mail.com",
          
             };
+
+            var organizer1 = new User()
+            {
+                FirstName = "Sara",
+                LastName = "Johansson",
+                UserName = "saram@mail.com",
+                Email = "sara@mail.com",
+
+            };
+
+            var organizer2 = new User()
+            {
+                FirstName = "Johanna",
+                LastName = "Svensson",
+                UserName = "johannam@mail.com",
+                Email = "johanna@mail.com",
+
+            };
             await _userManager.CreateAsync(admin1, "Passw0rd!");
             await _userManager.CreateAsync(admin2, "Passw0rd#");
             await _userManager.AddToRoleAsync(admin1, "Admin");
             await _userManager.AddToRoleAsync(admin2, "Admin");
+
+            await _userManager.CreateAsync(organizer1, "Passw0rd!");
+            await _userManager.CreateAsync(organizer2, "Passw0rd#");
+            await _userManager.AddToRoleAsync(organizer1, "Organizer");
+            await _userManager.AddToRoleAsync(organizer2, "Organizer");
 
             /* var Organizer = new List<User>[]
              {
@@ -74,6 +97,7 @@ namespace EventiaWebapp.Data
                         "In a time when the world is changing forever, there is one place where everyone can be free…",
                     Place = "Kit Kat Club", Address = "Northumberland Ave, London WC2N 5DE, United Kingdom",
                     Date = new DateTime(2022, 10, 22), Spots_available = 22,
+                    Organizer = organizer1,
                    
                 },
                 new Event
@@ -82,6 +106,7 @@ namespace EventiaWebapp.Data
                     Description = "The '80s romcom is now a Broadway musical that hits all the right notes",
                     Place = "Savoy Theatre", Address = "Savoy Ct, Strand, London WC2R 0ET, United Kingdom",
                     Date = new DateTime(2022, 09, 10), Spots_available = 165,
+                    Organizer = organizer2
            
                 },
                 new Event
@@ -91,6 +116,7 @@ namespace EventiaWebapp.Data
                         "The Book of Mormon musical follows the journey of two Mormon missionaries who travel to Africa to preach their religion.",
                     Place = "Prince of Wales Theatre", Address = "Coventry St, London W1D 6AS, United Kingdom",
                     Date = new DateTime(2023, 1, 28), Spots_available = 89,
+                    Organizer = organizer2
    
                 },
                 new Event
@@ -100,6 +126,7 @@ namespace EventiaWebapp.Data
                         "Based on the hit 1994 Walt Disney animated film of the same name, The Lion King musical is set in the African Pridelands and tells the coming of age story of lion cub Simba",
                     Place = "Lyceum Theatre", Address = "21 Wellington St, London WC2E 7RQ, United Kingdom",
                     Date = new DateTime(2022, 6, 5), Spots_available = 245,
+                    Organizer = organizer1
 
                 },
             }; 

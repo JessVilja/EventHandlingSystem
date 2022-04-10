@@ -8,14 +8,17 @@ namespace EventiaWebapp.Controllers
     public class EventController : Controller
     {
         private readonly EventsHandler _EventsHandler;
+        private readonly OrganizerHandler _organizerHandler;
         private readonly UserManager<User> _userManager;
 
-        public EventController(EventsHandler eventHandler, UserManager<User> userManager)
+        public EventController(EventsHandler eventHandler, OrganizerHandler organizerHandler, UserManager<User> userManager)
         {
             _EventsHandler = eventHandler;
+            _organizerHandler = organizerHandler;
             _userManager = userManager;
         }
-        public async Task <IActionResult> Index()
+
+        public async Task<IActionResult> Index()
         {
             return View("Index");
         }
@@ -24,6 +27,7 @@ namespace EventiaWebapp.Controllers
         {
             return View("Events");
         }
+
         /*
         public User GetCurrentUser()
         {
@@ -34,11 +38,11 @@ namespace EventiaWebapp.Controllers
         public async Task<IActionResult> MyEvents()
         {
             var attendee = await _userManager.GetUserAsync(User);
-           // var attendee = await _EventsHandler.GetSingleAttendee(1);
-            return View("MyEvents", attendee); 
-           //return View();
+            // var attendee = await _EventsHandler.GetSingleAttendee(1);
+            return View("MyEvents", attendee);
+            //return View();
         }
-       
+
         public async Task<IActionResult> Join(int id)
         {
             var singleEvent = await _EventsHandler.GetSingleEventById(id);
@@ -49,8 +53,22 @@ namespace EventiaWebapp.Controllers
         {
             var person = await _userManager.GetUserAsync(User);
             var eventJoined = await _EventsHandler.JoinedEvent(person, id);
-            return View(eventJoined); 
-            
+            return View(eventJoined);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddEvent([Bind("Id, Title, Description, Place, Date, Spots_available")] Event events)
+        {
+            var person = await _userManager.GetUserAsync(User);
+            await _organizerHandler.AddNewEvent(events, person);
+            return View();
+        }
+
+        
+        public async Task<IActionResult> AddEvent()
+        {
+            return View();
         }
     }
 }

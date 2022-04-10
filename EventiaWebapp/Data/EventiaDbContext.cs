@@ -18,9 +18,9 @@ namespace EventiaWebapp.Data
         {
 
             modelBuilder.Entity<User>()
-                .HasOne(e => e.HostedEvent)
-                .WithMany(e => e.Organizer);
-                
+                .HasMany(e => e.HostedEvent)
+                .WithOne(e => e.Organizer)
+                .OnDelete(DeleteBehavior.NoAction);
 
 
             base.OnModelCreating(modelBuilder);

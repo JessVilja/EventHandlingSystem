@@ -10,6 +10,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<DbInitializer>();
 builder.Services.AddScoped<EventsHandler>();
+builder.Services.AddScoped<OrganizerHandler>();
 
 //builder.Services.AddSingleton<EventHandler>();
 

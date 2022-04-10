@@ -9,7 +9,7 @@ namespace EventiaWebapp.Models
         public string? LastName { get; set; }
 
         [InverseProperty("Organizer")]
-        public Event? HostedEvent { get; set; }
+        public IList<Event> HostedEvent { get; set; }
 
         [InverseProperty("Attendees")]
         public IList<Event> JoinedEvents { get; set; }
