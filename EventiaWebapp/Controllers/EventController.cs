@@ -28,19 +28,10 @@ namespace EventiaWebapp.Controllers
             return View("Events");
         }
 
-        /*
-        public User GetCurrentUser()
-        {
-            var currentUser = user;
-            var user = _userManager.GetUserAsync(User).Result;
-            return user;
-        } */
         public async Task<IActionResult> MyEvents()
         {
             var attendee = await _userManager.GetUserAsync(User);
-            // var attendee = await _EventsHandler.GetSingleAttendee(1);
             return View("MyEvents", attendee);
-            //return View();
         }
 
         public async Task<IActionResult> Join(int id)
@@ -73,9 +64,6 @@ namespace EventiaWebapp.Controllers
 
         public async Task<IActionResult> OrganizeEvent()
         {
-            //var person = await _userManager.GetUserAsync(User);
-
-
             return View();
         }
     }

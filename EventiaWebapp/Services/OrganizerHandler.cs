@@ -26,6 +26,7 @@ namespace EventiaWebapp.Services
                 Description = events.Description,
                 Date = events.Date,
                 Organizer = organizerQuery,
+                Place = events.Place,
             };
 
             _context.Events.Add(newEvent);

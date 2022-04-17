@@ -66,28 +66,7 @@ namespace EventiaWebapp.Data
             await _userManager.AddToRoleAsync(organizer1, "Organizer");
             await _userManager.AddToRoleAsync(organizer2, "Organizer");
 
-            /* var Organizer = new List<User>[]
-             {
-                 new User
-                 {
-                     FirstName = "Ryans Travelling Agency",
-                     Email = "ryanstravelling@gmail.com",
-                     Phone_number = "0730781129"
-                 },
-                 new User
-                 {
-                     Name = "Happy Places Travelling",
-                     Email = "happyplacestravelling@gmail.com",
-                     Phone_number = "0704373051"
-                 },
-                 new Organizer
-                 {
-                     Name = "The Theater Tour Company",
-                     Email = "ttc@gmail.com",
-                     Phone_number = "0723756493"
-                 },
-             }; 
-            */
+      
             var Events = new List<Event>
             {
                 new Event
@@ -130,42 +109,8 @@ namespace EventiaWebapp.Data
 
                 },
             }; 
-            /*
-            var Attendee = new Attendee[]
-            {
-                new Attendee
-                {
-                    Name = "Debbie Reynolds",
-                    Email = "debbier@gmail.com",
-                    Phone_number = "0765434409",
-                },
-                new Attendee
-                {
-                    Name = "Sara Silver",
-                    Email = "saras@gmail.com",
-                    Phone_number = "0709876625",
-             
-                },
-                new Attendee
-                {
-                    Name = "Meg Griffin",
-                    Email = "meggriffin@gmail.com",
-                    Phone_number = "0738973365",
-                  
-                },
-                new Attendee
-                {
-                    Name = "Lisa Simpson",
-                    Email = "lisasimpson@gmail.com",
-                    Phone_number = "0727769221",
-                  
-                }, 
-
-            }; */
             
            await _ctx.AddRangeAsync(Events);
-           // await _context.AddRangeAsync(Attendee);
-           //await _context.AddRangeAsync(Organizer);
             await _ctx.SaveChangesAsync(); 
         } 
         public async Task Recreate()

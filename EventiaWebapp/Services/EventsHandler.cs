@@ -18,14 +18,6 @@ namespace EventiaWebapp.Services
             var items = await _context.Events.ToListAsync();
             return items;
         }
-
-   /*
-        public async Task<User> GetSingleAttendee(User user)
-        {
-            var singleAttendee = await _context.Users.Where(A => A.Id == id).FirstOrDefaultAsync();
-            return singleAttendee; 
-        }  */
-
         public async Task<Event> GetSingleEventById(int id)
         {
             var singleEvent = await _context.Events.Where(E => E.Id == id).FirstOrDefaultAsync();
